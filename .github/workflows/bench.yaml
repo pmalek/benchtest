@@ -35,4 +35,4 @@ jobs:
 
         # Enable Job Summary for PRs
         summary-always: true
-        fail-on-alert: false
+        fail-on-alert: true
