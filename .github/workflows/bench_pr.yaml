@@ -1,8 +1,8 @@
 name: Bench
 on:
-  push:
+  pull_request:
     branches:
-    - main
+    - '*'
 
 permissions:
   contents: write
@@ -26,11 +26,11 @@ jobs:
         tool: 'go'
         output-file-path: bench.out
         github-token: ${{ secrets.GITHUB_TOKEN }}
-        auto-push: true
+        auto-push: false
         # Show alert with commit comment on detecting possible performance regression
         alert-threshold: '110%'
-        comment-on-alert: true
+        comment-on-alert: false
         # Enable Job Summary for PRs
-        summary-always: false
+        summary-always: true
         fail-on-alert: true
         alert-comment-cc-users: '@pmalek'
