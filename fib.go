@@ -1,6 +1,10 @@
 package fib
 
-import "sync"
+import (
+	"math/rand"
+	"sync"
+	"time"
+)
 
 var _m sync.Map
 
@@ -20,6 +24,9 @@ func Fib(n uint) uint {
 		n1 = Fib(n - 1)
 		_m.Store(n-1, n1)
 	}
+
+	dur := 500*time.Microsecond + time.Duration(rand.Intn(500))*time.Microsecond
+	time.Sleep(dur)
 
 	return n2.(uint) + n1.(uint)
 }
