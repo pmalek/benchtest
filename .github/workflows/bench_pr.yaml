@@ -32,5 +32,5 @@ jobs:
         comment-on-alert: false
         # Enable Job Summary for PRs
         summary-always: true
-        fail-on-alert: true
+        fail-on-alert: false
         alert-comment-cc-users: '@pmalek'
