@@ -25,7 +25,7 @@ func Fib(n uint) uint {
 		_m.Store(n-1, n1)
 	}
 
-	dur := 1500*time.Microsecond + time.Duration(rand.Intn(500))*time.Microsecond
+	dur := 580*time.Microsecond + time.Duration(rand.Intn(500))*time.Microsecond
 	time.Sleep(dur)
 
 	return n2.(uint) + n1.(uint)
