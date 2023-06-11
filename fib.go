@@ -1,9 +1,25 @@
 package fib
 
+import "sync"
+
+var _m sync.Map
+
 // Fib returns nth Fibonnaci sequence number.
 func Fib(n uint) uint {
 	if n <= 1 {
 		return 1
 	}
-	return Fib(n-2) + Fib(n-1)
+
+	n2, ok := _m.Load(n - 2)
+	if !ok {
+		n2 = Fib(n - 2)
+		_m.Store(n-2, n2)
+	}
+	n1, ok := _m.Load(n - 1)
+	if !ok {
+		n1 = Fib(n - 1)
+		_m.Store(n-1, n1)
+	}
+
+	return n2.(uint) + n1.(uint)
 }
