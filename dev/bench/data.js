@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1686488428956,
+  "lastUpdate": 1686488792929,
   "repoUrl": "https://github.com/pmalek/benchtest",
   "entries": {
     "Go Benchmark": [
@@ -216,6 +216,38 @@ window.BENCHMARK_DATA = {
             "value": 1071114,
             "unit": "ns/op",
             "extra": "1118 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "name": "pmalek",
+            "username": "pmalek"
+          },
+          "committer": {
+            "name": "pmalek",
+            "username": "pmalek"
+          },
+          "id": "cd301d6fac995b5b0a2fb04417cf0837011c94ce",
+          "message": "wip",
+          "timestamp": "2023-06-11T12:10:31Z",
+          "url": "https://github.com/pmalek/benchtest/pull/1/commits/cd301d6fac995b5b0a2fb04417cf0837011c94ce"
+        },
+        "date": 1686488792145,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "BenchmarkFib10",
+            "value": 2227422,
+            "unit": "ns/op",
+            "extra": "535 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFib20",
+            "value": 2228338,
+            "unit": "ns/op",
+            "extra": "535 times\n2 procs"
           }
         ]
       }
