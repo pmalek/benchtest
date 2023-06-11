@@ -1,5 +1,5 @@
 window.BENCHMARK_DATA = {
-  "lastUpdate": 1686486620507,
+  "lastUpdate": 1686488428051,
   "repoUrl": "https://github.com/pmalek/benchtest",
   "entries": {
     "Go Benchmark": [
@@ -144,6 +144,42 @@ window.BENCHMARK_DATA = {
             "value": 1068944,
             "unit": "ns/op",
             "extra": "1125 times\n2 procs"
+          }
+        ]
+      },
+      {
+        "commit": {
+          "author": {
+            "email": "patryk.malek@konghq.com",
+            "name": "Patryk Małek",
+            "username": "pmalek"
+          },
+          "committer": {
+            "email": "patryk.malek@konghq.com",
+            "name": "Patryk Małek",
+            "username": "pmalek"
+          },
+          "distinct": true,
+          "id": "2834e323d792c791b33cb4cfc514cd967e5ff7f3",
+          "message": "ci: pr summaries",
+          "timestamp": "2023-06-11T14:59:54+02:00",
+          "tree_id": "6096485d7d4b0529f4c5346594ad05756e390233",
+          "url": "https://github.com/pmalek/benchtest/commit/2834e323d792c791b33cb4cfc514cd967e5ff7f3"
+        },
+        "date": 1686488427627,
+        "tool": "go",
+        "benches": [
+          {
+            "name": "BenchmarkFib10",
+            "value": 1070473,
+            "unit": "ns/op",
+            "extra": "1123 times\n2 procs"
+          },
+          {
+            "name": "BenchmarkFib20",
+            "value": 1071114,
+            "unit": "ns/op",
+            "extra": "1118 times\n2 procs"
           }
         ]
       }
