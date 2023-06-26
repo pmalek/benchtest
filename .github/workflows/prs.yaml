@@ -1,0 +1,27 @@
+name: PR checks
+run-name: PR checks, branch:${{ github.ref_name }}, triggered by @${{ github.actor }}
+
+concurrency:
+  # Run only for most recent commit in PRs but for all tags and commits on main
+  # Ref: https://docs.github.com/en/actions/using-jobs/using-concurrency
+  group: ${{ github.workflow }}-${{ github.head_ref || github.sha }}
+  cancel-in-progress: true
+
+on:
+  pull_request:
+    branches:
+    - '*'
+  push:
+    branches:
+    - 'main'
+    tags:
+    - '*'
+  workflow_dispatch: {}
+
+jobs:
+  benchmark:
+    name: Run Go stuff
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: actions/setup-go@v4
