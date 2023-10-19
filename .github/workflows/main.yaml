@@ -33,6 +33,8 @@ jobs:
           tool: 'go'
           # Where the output from the benchmark tool is stored
           output-file-path: bench_output.txt
+          # Updates the file content instead of generating a Git commit in GitHub Pages branch
+          external-data-json-path: ./cache/benchmark-data.json
           # Workflow will fail when an alert happens
           fail-on-alert: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -41,5 +43,5 @@ jobs:
       - name: Save benchmark data
         uses: actions/cache/save@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
         with:
-          path: benchmark-data.json
+          path: ./cache/benchmark-data.json
           key: ${{ runner.os }}-go-benchmark
