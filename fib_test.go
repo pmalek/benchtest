@@ -6,18 +6,18 @@ import (
 
 func BenchmarkFib10(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		_ = Fib(15)
+		_ = Fib(20)
 	}
 }
 
 func BenchmarkFib20(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		_ = Fib(26)
+		_ = Fib(40)
 	}
 }
 
 func BenchmarkFib25(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		_ = Fib(35)
+		_ = Fib(50)
 	}
 }
