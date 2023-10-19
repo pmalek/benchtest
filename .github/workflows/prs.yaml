@@ -27,9 +27,10 @@ jobs:
           set -o pipefail
           make bench | tee ${{ github.sha }}_bench_output.txt
 
-      # Download previous benchmark result from cache (if exists)
+      # Download previous benchmark result from cache
       - name: Download previous benchmark data
-        uses: actions/cache@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+        id: cache-restore
+        uses: actions/cache/restore@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
         with:
           path: ./cache
           key: ${{ runner.os }}-go-benchmark
