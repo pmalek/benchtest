@@ -1,7 +1,6 @@
-name: Pull Request
+name: Main
 on:
-  merge_group:
-  pull_request:
+  push:
     branches:
       - main
 
@@ -25,7 +24,7 @@ jobs:
       - name: Run benchmark
         run: |
           set -o pipefail
-          make bench | tee ${{ github.sha }}_bench_output.txt
+          make bench | tee bench_output.txt
 
       # Download previous benchmark result from cache (if exists)
       - name: Download previous benchmark data
@@ -34,20 +33,16 @@ jobs:
           path: ./cache
           key: ${{ runner.os }}-go-benchmark
 
-      - name: Compare benchmark result
+      - name: Store benchmark result
         uses: benchmark-action/github-action-benchmark@70405016b032d44f409e4b1b451c40215cbe2393 # v1.18.0
         with:
           # What benchmark tool the output.txt came from
           tool: 'go'
           # Where the output from the benchmark tool is stored
-          output-file-path: ${{ github.sha }}_bench_output.txt
+          output-file-path: bench_output.txt
           # Where the previous data file is stored
           external-data-json-path: ./cache/benchmark-data.json
-          # Do not save the data
-          save-data-file: false
           # Workflow will fail when an alert happens
           fail-on-alert: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           comment-on-alert: true
-          # Enable Job Summary for PRs
-          summary-always: true
