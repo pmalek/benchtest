@@ -23,13 +23,20 @@ jobs:
           set -o pipefail
           make bench | tee ${{ github.sha }}_bench_output.txt
 
+      - name: Get Main Branch SHA
+        id: get-main-branch-sha
+        run: |
+          SHA=$(git rev-parse main)
+          echo "::set-output name=sha::$SHA"
+
+
       # Download previous benchmark result from cache
       - name: Download previous benchmark data
         uses: actions/cache/restore@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
         with:
           fail-on-cache-miss: true
           path: ./cache/benchmark-data.json
-          key: ${{ runner.os }}-go-benchmark
+          key: ${{ steps.get-main-branch-sha.outputs.sha }}-go-benchmark
 
       - name: Compare benchmark result
         uses: benchmark-action/github-action-benchmark@70405016b032d44f409e4b1b451c40215cbe2393 # v1.18.0
