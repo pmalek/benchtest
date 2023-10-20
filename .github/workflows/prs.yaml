@@ -28,7 +28,7 @@ jobs:
       - name: Get Main Branch SHA
         id: get-main-branch-sha
         run: |
-          SHA=$(git rev-parse main)
+          SHA=$(git rev-parse origin/main)
           echo "::set-output name=sha::$SHA"
 
 
