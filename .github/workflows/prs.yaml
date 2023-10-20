@@ -36,10 +36,13 @@ jobs:
           external-data-json-path: ./main_bench_output.json
           save-data-file: true
           fail-on-alert: false
+      - uses: actions/upload-artifact@v3
+        with:
+          name: main_bench_output
+          path: ./main_bench_output.json
 
   bench-PR:
     runs-on: ubuntu-latest
-    needs: [bench-main]
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@8ade135a41bc03ea155e62e844d188df1ea18608 # v3.5.2
@@ -54,6 +57,13 @@ jobs:
         run: |
           set -o pipefail
           make bench | tee ${{ github.sha }}_bench_output.txt
+
+      - name: Downloads benchmarks from main
+        needs: [bench-main]
+        uses: actions/download-artifact@v3
+        with:
+          name: main_bench_output
+          path: ./main_bench_output.json
 
       - name: Compare benchmark result
         uses: benchmark-action/github-action-benchmark@70405016b032d44f409e4b1b451c40215cbe2393 # v1.18.0
