@@ -20,7 +20,6 @@ jobs:
           cache-dependency-path: './go.sum'
           check-latest: true
 
-      # Run benchmark with `go test -bench` and stores the output to a file
       - name: Run benchmark
         run: |
           set -o pipefail
@@ -40,8 +39,9 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           comment-on-alert: true
 
-      - name: Save benchmark data
+      - name: Save benchmark JSON
         uses: actions/cache/save@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
         with:
           path: ./cache/benchmark-data.json
+          # Save with commit hash because actions/cache cannot override keys
           key: ${{ github.sha }}-go-benchmark
