@@ -28,7 +28,7 @@ jobs:
         id: get-main-branch-sha
         run: |
           SHA=$(git rev-parse origin/main)
-          echo "::set-output name=sha::$SHA"
+          echo "name=sha::$SHA" >> $GITHUB_OUTPUT
 
       - name: Download benchmark from Main
         uses: actions/cache/restore@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
