@@ -34,7 +34,7 @@ jobs:
           # Where the output from the benchmark tool is stored
           output-file-path: bench_output.txt
           # Updates the file content instead of generating a Git commit in GitHub Pages branch
-          external-data-json-path: ./cache/benchmark-data.json
+          external-data-json-path: ./benchmark-data.json
           # Workflow will fail when an alert happens
           fail-on-alert: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
