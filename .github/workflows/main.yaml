@@ -19,30 +19,3 @@ jobs:
           go-version-file: './go.mod'
           cache-dependency-path: './go.sum'
           check-latest: true
-
-      # Run benchmark with `go test -bench` and stores the output to a file
-      - name: Run benchmark
-        run: |
-          set -o pipefail
-          make bench | tee bench_output.txt
-
-      - name: Get JSON for benchmark
-        uses: benchmark-action/github-action-benchmark@70405016b032d44f409e4b1b451c40215cbe2393 # v1.18.0
-        with:
-          # What benchmark tool the output.txt came from
-          tool: 'go'
-          # Where the output from the benchmark tool is stored
-          output-file-path: bench_output.txt
-          # Updates the file content instead of generating a Git commit in GitHub Pages branch
-          external-data-json-path: ./cache/benchmark-data.json
-          # Workflow will fail when an alert happens
-          fail-on-alert: true
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          comment-on-alert: true
-
-      - name: Save benchmark data without cache
-        uses: actions/upload-artifact@v3
-        with:
-          name: benchmark-main
-          path: ./cache/benchmark-data.json
-          if-no-files-found: error
