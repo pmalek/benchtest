@@ -43,5 +43,6 @@ jobs:
         uses: actions/cache/save@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
         with:
           path: ./cache/benchmark-data.json
-          # Save with commit hash because actions/cache cannot override keys
-          key: ${{ github.sha }}-go-benchmark
+          # Save with commit hash to avoid "cache already exists"
+          # Save with OS to prevent comparing against results from different CPUs
+          key: ${{ github.sha }}-${{ runner.os }}-go-benchmark

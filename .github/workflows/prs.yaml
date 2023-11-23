@@ -35,24 +35,40 @@ jobs:
 
       - name: Download benchmark from Main
         uses: actions/cache/restore@704facf57e6136b1bc63b828d79edcd491f0ee84 # v3.3.2
+        id: cache
         with:
-          fail-on-cache-miss: true
           path: ./cache/benchmark-data.json
-          key: ${{ steps.get-main-branch-sha.outputs.sha }}-go-benchmark
+          key: ${{ steps.get-main-branch-sha.outputs.sha }}-${{ runner.os }}-go-benchmark
 
-      - name: Compare benchmarks
-        uses: benchmark-action/github-action-benchmark@70405016b032d44f409e4b1b451c40215cbe2393 # v1.18.0
+      - name: Compare benchmarks with Main
+        uses: benchmark-action/github-action-benchmark@v1
+        if: steps.cache.outputs.cache-hit == 'true'
         with:
+          alert-threshold: "200%"
           # What benchmark tool the output.txt came from
           tool: 'go'
           # Where the output from the benchmark tool is stored
           output-file-path: ${{ github.sha }}_bench_output.txt
-          # Where the previous data file is stored
+          # Where the benchmarks in master are (to compare)
           external-data-json-path: ./cache/benchmark-data.json
           # Do not save the data
           save-data-file: false
           # Workflow will fail when an alert happens
           fail-on-alert: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          # Enable Job Summary for PRs
+          summary-always: true
+
+      - name: Run benchmarks but don't compare to Main branch
+        uses: benchmark-action/github-action-benchmark@v1
+        if: steps.cache.outputs.cache-hit != 'true'
+        with:
+          # What benchmark tool the output.txt came from
+          tool: 'go'
+          # Where the output from the benchmark tool is stored
+          output-file-path: ${{ github.sha }}_bench_output.txt
+          # Write benchmarks to this file, do not publish to GitHub Pages
+          save-data-file: false
+          external-data-json-path: ./cache/benchmark-data.json
           # Enable Job Summary for PRs
           summary-always: true
